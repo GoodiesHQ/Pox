@@ -12,7 +12,11 @@ int main(int argc, char **argv){
     if(argc != 4 || strlen(argv[3]) != 2 ||
                 !((argv[3][0] == '3' && argv[3][1] == '2') || (argv[3][0] == '6' && argv[3][1] == '4'))
             ){
+#ifdef DEBUG
+        fprintf(stderr, "[DBG] Usage: %s <target file> <shellcode> <shellcode arch 32|64>\n", argv[0]);
+#else
         fprintf(stderr, "Usage: %s <target file> <shellcode> <shellcode arch 32|64>\n", argv[0]);
+#endif
         return -1;
     }
 
