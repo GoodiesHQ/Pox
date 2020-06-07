@@ -89,7 +89,7 @@ int main(int argc, char **argv){
 
     pox(&bin_target, &bin_payload, &bin_out, buf_tmp, buf_out);
 
-    snprintf(out_path, sizeof(out_path), "%s.op8", argv[1]);
+    snprintf(out_path, sizeof(out_path), "%s.pox", argv[1]);
     fprintf(stdout, "Creating infected ELF '%s'\n", out_path);
     FILE *f = fopen(out_path, "w");
     if(!f){
